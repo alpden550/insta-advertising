@@ -26,8 +26,9 @@ def get_all_posts_comments(post_id):
 
 
 def find_names(text):
+    # resgular expression was taken https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     pattern = re.compile(
-        '(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)')
+        r'(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)')
     result = pattern.findall(text)
     return result
 

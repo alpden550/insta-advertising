@@ -16,7 +16,7 @@ def get_post_id(url):
     return response
 
 
-def get_all_posts_comments(post_id):
+def get_all_comments_for_post(post_id):
     return [(comment['user_id'],
              comment['user']['username'],
              comment['text']) for comment in bot.get_media_comments_all(post_id)]
@@ -30,7 +30,7 @@ def find_names(text):
     return result
 
 
-def is_user_exist(users):
+def is_any_user_exist(users):
     return any(bot.get_user_id_from_username(user) for user in users)
 
 
@@ -51,7 +51,7 @@ def create_parser():
 
 def get_contestants(post_url, author):
     post_id = get_post_id(post_url)
-    all_comments = get_all_posts_comments(post_id)
+    all_comments = get_all_comments_for_post(post_id)
     filter_comments = []
     likers = get_media_likers(post_id)
     followers = get_users_followers(user_name=author)
@@ -59,7 +59,7 @@ def get_contestants(post_url, author):
     for comment in all_comments:
         inst_id, inst_author, inst_text = comment
         users_in_text = find_names(inst_text)
-        if (users_in_text and is_user_exist(users_in_text) and
+        if (users_in_text and is_any_user_exist(users_in_text) and
                 str(inst_id) in likers and str(inst_id)) in followers:
             filter_comments.append(inst_author)
 

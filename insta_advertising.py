@@ -5,10 +5,6 @@ from dotenv import load_dotenv
 from instabot import Bot
 
 
-INST_LOGIN = os.getenv('INST_LOGIN')
-INST_PASSW = os.getenv('INST_PASSWORD')
-
-
 def get_post_id(url):
     response = bot.get_media_id_from_link(url)
     if not response:
@@ -34,14 +30,6 @@ def is_any_user_exist(users):
     return any(bot.get_user_id_from_username(user) for user in users)
 
 
-def get_media_likers(post_id):
-    return bot.get_media_likers(post_id)
-
-
-def get_users_followers(user_name):
-    return bot.get_user_followers(user_name)
-
-
 def create_parser():
     parser = argparse.ArgumentParser(description='Get contestants from instagram post')
     parser.add_argument('inst_post', help='Post from which you need to get contestants')
@@ -53,8 +41,8 @@ def get_contestants(post_url, author):
     post_id = get_post_id(post_url)
     all_comments = get_all_comments_for_post(post_id)
     filter_comments = []
-    likers = get_media_likers(post_id)
-    followers = get_users_followers(user_name=author)
+    likers = bot.get_media_likers(post_id)
+    followers = bot.get_user_followers(user_name=author)
 
     for comment in all_comments:
         inst_id, inst_author, inst_text = comment
@@ -70,7 +58,7 @@ if __name__ == "__main__":
     args = create_parser()
     load_dotenv()
     bot = Bot()
-    bot.login(username=INST_LOGIN, password=INST_PASSW)
+    bot.login(username=os.getenv('INST_LOGIN'), password=os.getenv('INST_PASSWORD'))
 
     print("We're counting contestants, please, wait. It can take some time...")
     contestants = get_contestants(args.inst_post, args.inst_account)

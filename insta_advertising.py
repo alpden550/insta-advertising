@@ -5,12 +5,8 @@ from dotenv import load_dotenv
 from instabot import Bot
 
 
-load_dotenv()
 INST_LOGIN = os.getenv('INST_LOGIN')
 INST_PASSW = os.getenv('INST_PASSWORD')
-
-bot = Bot()
-bot.login(username=INST_LOGIN, password=INST_PASSW)
 
 
 def get_post_id(url):
@@ -71,6 +67,9 @@ def get_contestants(post_url, author):
 
 if __name__ == "__main__":
     args = create_parser()
+    load_dotenv()
+    bot = Bot()
+    bot.login(username=INST_LOGIN, password=INST_PASSW)
     print("We're counting contestants, please, wait. It can take some time...")
     contestants = get_contestants(args.inst_post, args.inst_account)
     print(contestants)

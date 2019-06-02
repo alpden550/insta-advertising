@@ -42,7 +42,7 @@ def get_contestants(post_url, author):
     all_comments = get_all_comments_for_post(post_id)
     filter_comments = []
     likers = bot.get_media_likers(post_id)
-    followers = bot.get_user_followers(user_name=author)
+    followers = bot.get_user_followers(author)
 
     for comment in all_comments:
         inst_id, inst_author, inst_text = comment

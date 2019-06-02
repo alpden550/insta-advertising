@@ -10,9 +10,10 @@ INST_PASSW = os.getenv('INST_PASSWORD')
 
 
 def get_post_id(url):
-    if not bot.get_media_id_from_link(url):
+    response = bot.get_media_id_from_link(url)
+    if not response:
         return None
-    return bot.get_media_id_from_link(url)
+    return response
 
 
 def get_all_posts_comments(post_id):
@@ -70,6 +71,7 @@ if __name__ == "__main__":
     load_dotenv()
     bot = Bot()
     bot.login(username=INST_LOGIN, password=INST_PASSW)
+
     print("We're counting contestants, please, wait. It can take some time...")
     contestants = get_contestants(args.inst_post, args.inst_account)
     print(contestants)

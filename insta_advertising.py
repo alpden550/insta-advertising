@@ -6,10 +6,7 @@ from instabot import Bot
 
 
 def get_post_id(url):
-    response = bot.get_media_id_from_link(url)
-    if not response:
-        return None
-    return response
+    return bot.get_media_id_from_link(url)
 
 
 def get_all_comments_for_post(post_id):

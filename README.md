@@ -42,7 +42,7 @@ name of post's owner
 Example:
 
 ```bash
-python insta_advertising.py https://www.instagram.com/p/ByIWGMYp5la/ --inst_account beauty_bliss_
+python insta_advertising.py https://www.instagram.com/p/ByVC-TNBvu0/ --inst_account korea_v_ufe
 ```
 
 ### Project Goals
